@@ -1,0 +1,46 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1; /* Faz com que o conteúdo ocupe o espaço antes do footer */
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  width: 100vw; /* Garante que ocupe 100% da largura da tela */
+  height: 120px; /* Mantém altura suficiente para cobrir a parte inferior */
+  background-color: #0a1128;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 4em;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  /* margin-top: auto; /* Isso força o footer a ir para o final */
+  /* position: relative; Mantém ele dentro do fluxo do layout */
+  /* bottom: 0; */
+  /* left: 0; */
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.logo {
+  height: 60px; /* Tamanho aumentado para mais destaque */
+}
+
+p {
+  font-size: 12px; /* Ajustado para melhor equilíbrio */
+}

@@ -1,13 +1,17 @@
 import styles from "./Footer.module.css";
 
-const Footer = (props) => {
+const Footer = () => {
   return (
-    <footer>
-      <p>
-        Feito com ❤️ por <a href={props.devLink}>{props.devName}</a>
-      </p>
+    <footer className={`footer ${styles.footer}`}>
+      <div className={styles.content}>
+        <img
+          src="/DevLandLogo.png"
+          alt="DevLand Logo"
+          className={styles.logo}
+        />
+        <p>© DevLand. Todos os direitos reservados.</p>
+      </div>
     </footer>
   );
 };
-
 export default Footer;

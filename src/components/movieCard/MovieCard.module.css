@@ -32,12 +32,13 @@
   width: 100%;
   text-align: center;
   transform: translateY(100%); /* Esconde a overlay */
-  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  background: rgba(43, 75, 111, 0.8); /* Fundo azul apenas para a caixa */
 }
 
 .movie .overlay h3 {
   font-size: 1.4rem;
-  color: #ffffff; /* Mantém a fonte branca */
+  color: #ffffff; /* Fonte branca */
   margin: 0;
 }
 
@@ -47,7 +48,7 @@
   gap: 10px;
   margin-top: 8px;
   font-size: 1rem;
-  color: #fff; /* Mantém a cor branca */
+  color: #fff; /* Fonte branca */
 }
 
 .movie .overlay .details span,
@@ -59,16 +60,16 @@
 .movie:hover {
   transform: scale(1.08);
   box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.4), 0px 0px 0px 2px white;
-  filter: brightness(0.7); /* Escurece a imagem */
+  filter: brightness(0.7); /* Escurece o card inteiro */
 }
 
 .movie:hover .overlay {
   transform: translateY(0); /* Exibe a overlay ao passar o mouse */
 }
 
-/* Manter o texto (title, type, year) branco e sem escurecimento */
+/* Garantir que o fundo da caixa não mude, apenas o texto e a caixa com fundo azul */
 .movie:hover .overlay h3,
 .movie:hover .overlay .details {
-  background: transparent; /* Remove o fundo da sobreposição */
-  color: white; /* Garante que o texto permaneça branco */
+  background: none; /* Remover qualquer fundo atrás do texto */
+  color: white; /* Manter o texto branco */
 }

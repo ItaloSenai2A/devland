@@ -20,6 +20,7 @@ body {
 }
 
 #app {
+  padding: 4em 4em 0 4em;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -27,17 +28,13 @@ body {
   padding: 0;
 }
 
-.logo {
-  width: 50%;
-  max-width: 500px;
-  overflow: hidden;
-  margin-bottom: 1rem;
-}
-
-.logo img {
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+  z-index: -1;
 }
 
 .search {
@@ -78,37 +75,20 @@ body {
   color: #f9d3b4;
 }
 
-.imgInicial {
-  width: 100%;
-  margin: 20px auto;
-  display: flex;
-  justify-content: center;
-}
-
-.imgInicial img {
-  width: 100vw;
-  height: auto;
-  object-fit: cover;
-  border-radius: 0;
-}
-
-/* Ajuste para dispositivos móveis */
 @media screen and (max-width: 768px) {
   .imgInicial img {
-    height: 40vh;
+    height: 40vh; /* A altura será 40% da altura da tela em dispositivos móveis */
   }
 }
 
 @media screen and (max-width: 480px) {
   .imgInicial img {
-    height: 50vh;
+    height: 50vh; /* A altura será 50% da altura da tela em telas menores */
   }
 }
 
-/* Título "Os mais populares" alinhado à esquerda e com fonte Inter Regular */
-.popular-title {
-  font-size: 2rem;
-  color: white;
+.container {
+  width: 100%;
   margin-top: 3rem;
   font-family: var(--font-inter);
   font-weight: 400;
@@ -120,25 +100,39 @@ body {
 /* Container para os filmes com rolagem horizontal e arrastável */
 .container {
   display: flex;
-  overflow-x: auto;
-  padding: 1rem;
-  gap: 20px;
-  margin-top: 2rem;
-  scroll-snap-type: x mandatory; /* Permite o "snap" do carrossel */
-  -webkit-overflow-scrolling: touch; /* Para permitir rolagem suave em dispositivos móveis */
-  cursor: grab; /* Muda o cursor para indicar que é possível arrastar */
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
 }
 
-.container::-webkit-scrollbar {
-  height: 8px;
+@media screen and (max-width: 600px) {
+  #app {
+    padding: 4rem 2rem;
+  }
+  .search {
+    padding: 1rem 1.75rem;
+    width: 100%;
+  }
+  .search input {
+    font-size: 1rem;
+  }
+  .search img {
+    width: 20px;
+    height: 20px;
+  }
 }
 
-.container::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
+@media screen and (max-width: 400px) {
+  #app {
+    padding: 4rem 1rem;
+  }
+  .movie {
+    width: 100%;
+    margin: 1rem;
+  }
 }
 
-/* Adiciona o comportamento de "snap" aos filmes */
 .movie {
   width: 310px;
   height: 460px;
@@ -206,54 +200,6 @@ body {
 
 .movie:hover div:nth-of-type(1) {
   opacity: 1;
-}
-
-/* Ajustes para telas menores */
-@media screen and (max-width: 600px) {
-  .container {
-    gap: 10px;
-  }
-
-  .movie {
-    width: 100%;
-    margin: 1rem 0;
-  }
-}
-
-.movies-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  overflow: hidden; /* Esconde a rolagem */
-  width: 100%; /* Ocupa 100% da tela */
-}
-
-.scroll-button {
-  position: absolute;
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 2rem;
-  color: white;
-  cursor: pointer;
-  z-index: 1;
-  transition: transform 0.2s;
-}
-
-.scroll-button:hover {
-  transform: scale(1.1);
-}
-
-.container {
-  display: flex;
-  transition: transform 0.5s ease-in-out; /* Animação suave */
-  width: 100%; /* Garantir que a container ocupe toda a largura */
-}
-
-.movie {
-  flex: 0 0 14.28%; /* Ajusta a largura do card para 7 cards por vez */
-  max-width: 14.28%;
-  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, filter 0.3s ease-in-out;
 }
 
 
