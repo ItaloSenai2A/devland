@@ -4,6 +4,8 @@ import Footer from "./components/footer/Footer";
 import MovieCard from "./components/movieCard/MovieCard";
 import Logo from "./assets/capadosite.png";
 import Lupa from "./assets/search.svg";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.js";
 import ImgInicial from "./assets/ImgInicial.png";
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.bundle.js";
@@ -33,6 +35,7 @@ const App = () => {
   const handleKeyPress = (e) => {
     e.key === "Enter" && searchMovies(search);
   };
+
   
   return (
     <div id="app">
