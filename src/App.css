@@ -16,53 +16,53 @@ body {
 }
 
 #app {
-  padding: 4em;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
 }
 
 .logo {
-  max-width: 100%;
+  width: 50%; /* Aumenta a largura da logo */
+  max-width: 500px; /* Ajusta o tamanho máximo */
   overflow: hidden;
+  margin-bottom: 1rem; /* Espaçamento entre logo e barra de pesquisa */
 }
 
 .logo img {
-  width: 70%;
+  width: 100%; /* A logo vai ocupar 100% da largura disponível */
   height: auto;
   display: block;
-  margin: auto;
 }
 
 .search {
-  width: 70%;
-  margin: 4rem 0 2rem;
+  width: 80%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 1.5rem 1.75rem;
-  border-radius: 4rem;
-  background: #1f2123;
-  box-shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527;
-  -webkit-box-shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  background: #ffffff;
+  margin-top: -150px; /* Ajuste para colar a barra de pesquisa na logo */
+}
+
+.search img {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  filter: invert(0) grayscale(100%) contrast(100%) brightness(0); /* Faz a lupa ficar preta */
 }
 
 .search input {
   flex: 1;
   border: none;
-  padding-right: 1rem;
   outline: none;
-  color: #a1a1a1;
-  background: #1f2123;
-  font-size: 1.5rem;
+  color: #000000;
+  background: #ffffff;
+  font-size: 1.3rem;
   font-weight: 500;
-}
-
-.search img {
-  width: 35px;
-  height: 35px;
-  cursor: pointer;
+  padding: 0.3rem;
 }
 
 .empty {
@@ -71,7 +71,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
   color: #f9d3b4;
 }
 
@@ -86,7 +85,7 @@ body {
 }
 
 @media screen and (max-width: 600px) {
-  .app {
+  #app {
     padding: 4rem 2rem;
   }
   .search {
@@ -103,7 +102,7 @@ body {
 }
 
 @media screen and (max-width: 400px) {
-  .app {
+  #app {
     padding: 4rem 1rem;
   }
   h1 {

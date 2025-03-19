@@ -39,13 +39,13 @@ const App = () => {
       <img className="logo" src={Logo} alt="" />
 
       <div className="search">
+        <img onClick={() => searchMovies(search)} src={Lupa} alt="Lupa" />
         <input
           onKeyDown={handleKeyPress}
           onChange={(e) => setSearch(e.target.value)}
           type="text"
           placeholder="Pesquise por título"
         />
-        <img onClick={() => searchMovies(search)} src={Lupa} alt="" />
       </div>
 
       {movies?.length > 0 ? (
