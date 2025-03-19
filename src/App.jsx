@@ -33,8 +33,6 @@ const App = () => {
     e.key === "Enter" && searchMovies(search);
   };
 
-
-  
   return (
     <div id="app">
       <img className="logo" src={Logo} alt="" />
