@@ -5,40 +5,38 @@ import MovieCard from "./components/movieCard/MovieCard";
 import Logo from "./assets/capadosite.png";
 import Lupa from "./assets/search.svg";
 import ImgInicial from "./assets/ImgInicial.png";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap/dist/js/bootstrap.bundle.js";
 
 const App = () => {
   const [search, setSearch] = useState("");
   const [movies, setMovies] = useState([]);
 
-  //Utilizando chave de API do arquivo .env
   const apiKey = "e4d577fa";
   const apiUrl = `https://omdbapi.com/?apikey=${apiKey}`;
 
-  //Alimentando com dados para não ficar nulo com useEffect
   useEffect(() => {
     searchMovies("Batman");
   }, []);
 
-  //criando a conexão com a API e trazendo informações
   const searchMovies = async (title) => {
     const response = await fetch(`${apiUrl}&s=${title}`);
     const data = await response.json();
-
-    //alimentando o movies
     setMovies(data.Search);
   };
-  //e = evento | ao clicar ou digitar acontece algo
+
   const handleKeyPress = (e) => {
     e.key === "Enter" && searchMovies(search);
   };
-  
+
   return (
     <div id="app">
-      <img className="logo" src={Logo} alt="" />
+      <img
+        className="logo img-fluid mb-3"
+        style={{ maxWidth: "500px" }}
+        src={Logo}
+        alt="Logo"
+      />
 
-      <div className="search">
+      <div className="search mb-5">
         <img onClick={() => searchMovies(search)} src={Lupa} alt="Lupa" />
         <input
           onKeyDown={handleKeyPress}
@@ -48,24 +46,46 @@ const App = () => {
         />
       </div>
 
-<div className="imgInicial">
-        <img src={ImgInicial} alt="" />
-</div>
+      <div 
+        className="imgInicial d-flex justify-content-center mt-5 mb-5"
+        style={{ paddingTop: '120px' }}
+      >
+        <img 
+          src={ImgInicial} 
+          alt="Imagem inicial" 
+          className="img-fluid w-100"
+          style={{ 
+            maxWidth: '1600px', 
+            objectFit: 'cover', 
+            height: 'auto',
+            maxHeight: '700px',
+            minHeight: '300px'
+          }} 
+        />
+      </div>
 
       {movies?.length > 0 ? (
-        <div className="container">
+        <div className="container d-flex justify-content-center flex-wrap gap-3 mb-4"> {/* Adicionando mb-4 aqui */}
           {movies.map((movie, index) => (
             <MovieCard key={index} apiUrl={apiUrl} {...movie} />
           ))}
         </div>
       ) : (
-        <h2 className="empty">😢 Filme não encontrado 😢</h2>
+        <h2 className="text-center text-warning mt-4">😢 Filme não encontrado 😢</h2>
       )}
 
-      <Footer
-        devName={" Ítalo Francesco"}
-        devLink={"https://github.com/ItaloSenai2A"}
-      />
+      {/* Footer */}
+      <footer className="text-center py-4" style={{ fontSize: "20px", fontWeight: "bolder", color: "#f9d3b4" }}>
+        <p>
+          Desenvolvido com 🤍 por{" "}
+          <a href="https://github.com/ItaloSenai2A" style={{ textDecoration: "none", color: "#f9d3b4" }}>
+            Ítalo Francesco
+          </a>
+        </p>
+        <p>
+          <i className="bi bi-heart-fill" style={{ color: "#ff0000" }}></i>{" "}
+        </p>
+      </footer>
     </div>
   );
 };

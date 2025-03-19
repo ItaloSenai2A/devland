@@ -33,19 +33,6 @@ body {
   z-index: -1;
 }
 
-.logo {
-  width: 50%; /* Aumenta a largura da logo */
-  max-width: 500px; /* Ajusta o tamanho máximo */
-  overflow: hidden;
-  margin-bottom: 1rem; /* Espaçamento entre logo e barra de pesquisa */
-}
-
-.logo img {
-  width: 100%; /* A logo vai ocupar 100% da largura disponível */
-  height: auto;
-  display: block;
-}
-
 .search {
   width: 80%;
   display: flex;
@@ -84,37 +71,15 @@ body {
   color: #f9d3b4;
 }
 
-.imgInicial {
-  width: 100%;
-  margin: 20px auto; /* Centraliza e dá espaçamento */
-  display: flex;
-  justify-content: center;
-}
-
-.imgInicial img {
-  width: 100vw; /* Ocupa 100% da largura da tela */
-  height: auto; /* Mantém a proporção da imagem */
-  object-fit: cover; /* Garante que a imagem se ajuste sem distorção */
-  border-radius: 0; /* Remove bordas arredondadas para ocupar a tela toda */
-}
-
-/* Ajuste para telas maiores */
-@media screen and (min-width: 768px) {
-  .imgInicial img {
-    max-height: 500px; /* Define um limite de altura em telas grandes */
-  }
-}
-
-/* Ajuste para dispositivos móveis */
 @media screen and (max-width: 768px) {
   .imgInicial img {
-    height: 40vh; /* Ocupa 40% da altura da tela no mobile */
+    height: 40vh; /* A altura será 40% da altura da tela em dispositivos móveis */
   }
 }
 
 @media screen and (max-width: 480px) {
   .imgInicial img {
-    height: 50vh; /* Ocupa 50% da altura da tela em telas muito pequenas */
+    height: 50vh; /* A altura será 50% da altura da tela em telas menores */
   }
 }
 
@@ -148,12 +113,6 @@ body {
 @media screen and (max-width: 400px) {
   #app {
     padding: 4rem 1rem;
-  }
-  h1 {
-    font-size: 2rem;
-  }
-  .container {
-    margin-top: 2rem;
   }
   .movie {
     width: 100%;
@@ -233,19 +192,4 @@ body {
   opacity: 1;
 }
 
-footer {
-  text-align: center;
-  font-size: 20px;
-  padding: 24px;
-  font-weight: bolder;
-  color: #f9d3b4;
-}
 
-footer a {
-  text-decoration: none;
-  color: #f9d3b4;
-}
-
-footer p ion-icon {
-  color: #ff0000;
-}
