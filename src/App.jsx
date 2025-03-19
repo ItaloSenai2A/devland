@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Footer from "./components/footer/Footer";
 import MovieCard from "./components/movieCard/MovieCard";
-import Logo from "./assets/devflix.png";
+import Logo from "./assets/capadosite.png";
 import Lupa from "./assets/search.svg";
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.bundle.js";
@@ -43,7 +43,7 @@ const App = () => {
           onKeyDown={handleKeyPress}
           onChange={(e) => setSearch(e.target.value)}
           type="text"
-          placeholder="Pesquise por filmes"
+          placeholder="Pesquise por título"
         />
         <img onClick={() => searchMovies(search)} src={Lupa} alt="" />
       </div>
