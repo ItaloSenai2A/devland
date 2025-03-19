@@ -4,6 +4,7 @@ import Footer from "./components/footer/Footer";
 import MovieCard from "./components/movieCard/MovieCard";
 import Logo from "./assets/devflix.png";
 import Lupa from "./assets/search.svg";
+import Background from "./assets/backgroundDevLand.jpg";
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.bundle.js";
 
@@ -28,12 +29,13 @@ const App = () => {
     //alimentando o movies
     setMovies(data.Search);
   };
-
   //e = evento | ao clicar ou digitar acontece algo
   const handleKeyPress = (e) => {
     e.key === "Enter" && searchMovies(search);
   };
 
+
+  
   return (
     <div id="app">
       <img className="logo" src={Logo} alt="" />
