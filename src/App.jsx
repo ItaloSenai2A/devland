@@ -28,12 +28,13 @@ const App = () => {
     //alimentando o movies
     setMovies(data.Search);
   };
-
   //e = evento | ao clicar ou digitar acontece algo
   const handleKeyPress = (e) => {
     e.key === "Enter" && searchMovies(search);
   };
 
+
+  
   return (
     <div id="app">
       <img className="logo" src={Logo} alt="" />
