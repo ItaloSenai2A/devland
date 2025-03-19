@@ -4,7 +4,7 @@ import Footer from "./components/footer/Footer";
 import MovieCard from "./components/movieCard/MovieCard";
 import Logo from "./assets/devflix.png";
 import Lupa from "./assets/search.svg";
-import Background from "./assets/backgroundDevLand.jpg";
+import ImgInicial from "./assets/ImgInicial.png";
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "bootstrap/dist/js/bootstrap.bundle.js";
 
@@ -33,8 +33,6 @@ const App = () => {
   const handleKeyPress = (e) => {
     e.key === "Enter" && searchMovies(search);
   };
-
-
   
   return (
     <div id="app">
@@ -49,6 +47,10 @@ const App = () => {
         />
         <img onClick={() => searchMovies(search)} src={Lupa} alt="" />
       </div>
+
+<div className="imgInicial">
+        <img src={ImgInicial} alt="" />
+</div>
 
       {movies?.length > 0 ? (
         <div className="container">
