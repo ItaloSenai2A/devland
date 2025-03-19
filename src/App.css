@@ -84,6 +84,40 @@ body {
   color: #f9d3b4;
 }
 
+.imgInicial {
+  width: 100%;
+  margin: 20px auto; /* Centraliza e dá espaçamento */
+  display: flex;
+  justify-content: center;
+}
+
+.imgInicial img {
+  width: 100vw; /* Ocupa 100% da largura da tela */
+  height: auto; /* Mantém a proporção da imagem */
+  object-fit: cover; /* Garante que a imagem se ajuste sem distorção */
+  border-radius: 0; /* Remove bordas arredondadas para ocupar a tela toda */
+}
+
+/* Ajuste para telas maiores */
+@media screen and (min-width: 768px) {
+  .imgInicial img {
+    max-height: 500px; /* Define um limite de altura em telas grandes */
+  }
+}
+
+/* Ajuste para dispositivos móveis */
+@media screen and (max-width: 768px) {
+  .imgInicial img {
+    height: 40vh; /* Ocupa 40% da altura da tela no mobile */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .imgInicial img {
+    height: 50vh; /* Ocupa 50% da altura da tela em telas muito pequenas */
+  }
+}
+
 .container {
   width: 100%;
   margin-top: 3rem;

@@ -4,68 +4,71 @@
   margin: 1.5rem;
   position: relative;
   overflow: hidden;
-  border: none;
+  border: 2px solid transparent;
   box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.4);
   border-radius: 10px;
-
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, filter 0.3s ease-in-out;
+  box-sizing: border-box;
+  cursor: pointer;
 }
 
-.movie div:nth-of-type(1) {
-  position: absolute;
-  text-align: center;
-  padding: 16px;
-  width: 100%;
-  opacity: 0;
-  top: 0;
-  color: #f9d3b4;
-}
-
-.movie:hover {
-  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.4);
-  transform: scale(1.05, 1.05);
-}
-.movie div:nth-of-type(2) {
+.movie .imageWrapper {
   width: 100%;
   height: 100%;
 }
 
-.movie div:nth-of-type(2) img {
-  height: 100%;
+.movie .imageWrapper img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.movie div:nth-of-type(3) {
-  z-index: 2;
-  background: #343739;
+.movie .overlay {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 16px 24px 24px;
+  padding: 16px;
+  width: 100%;
+  text-align: center;
+  transform: translateY(100%); /* Esconde a overlay */
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
-.movie div:nth-of-type(3) span {
-  text-transform: uppercase;
-  font-size: 13px;
-  letter-spacing: 2px;
-  font-weight: bold;
-  color: #f0f0f0;
+.movie .overlay h3 {
+  font-size: 1.4rem;
+  color: #ffffff; /* Mantém a fonte branca */
+  margin: 0;
 }
 
-.movie div:nth-of-type(3) h3 {
-  margin-top: 5px;
-  color: #f9d3b4;
+.movie .overlay .details {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+  font-size: 1rem;
+  color: #fff; /* Mantém a cor branca */
 }
 
-.movie:hover div:nth-of-type(2) {
-  height: 100%;
-  opacity: 0.3;
+.movie .overlay .details span,
+.movie .overlay .details p {
+  margin: 0;
+  font-weight: 400;
 }
 
-.movie:hover div:nth-of-type(3) {
-  background: transparent;
+.movie:hover {
+  transform: scale(1.08);
+  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.4), 0px 0px 0px 2px white;
+  filter: brightness(0.7); /* Escurece a imagem */
 }
-.movie:hover div:nth-of-type(1) {
-  opacity: 1;
+
+.movie:hover .overlay {
+  transform: translateY(0); /* Exibe a overlay ao passar o mouse */
+}
+
+/* Manter o texto (title, type, year) branco e sem escurecimento */
+.movie:hover .overlay h3,
+.movie:hover .overlay .details {
+  background: transparent; /* Remove o fundo da sobreposição */
+  color: white; /* Garante que o texto permaneça branco */
 }
