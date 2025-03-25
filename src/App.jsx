@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./App.css";
 import Footer from "./components/footer/Footer";
+import MovieCard from "./components/movieCard/MovieCard";
 import Logo from "./assets/capadosite.png";
 import Lupa from "./assets/search.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,46 +9,54 @@ import "bootstrap/dist/js/bootstrap.bundle.js";
 import ImgInicial from "./assets/ImgInicial.png";
 
 const App = () => {
+
+  const mudaTema = () => {
+const tema = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+
+document.documentElement.setAttribute("data-bs-theme", tema)};
+
+mudaTema()
+
+// Adiciona o listener para a mudança de tema automaticamente
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", mudaTema);
+
   const [search, setSearch] = useState("");
   const [movies, setMovies] = useState([]);
-  const [theme, setTheme] = useState("light-mode");
+
+  const movieContainerRefPopular = useRef(null);
+  const movieContainerRefLiked = useRef(null);
+  const movieContainerRefMoviesForYou = useRef(null);
+  const movieContainerRefSeriesForYou = useRef(null);
 
   const apiKey = "e4d577fa";
   const apiUrl = `https://omdbapi.com/?apikey=${apiKey}`;
 
   useEffect(() => {
-    const applySystemTheme = () => {
-      const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      setTheme(prefersDarkMode ? "dark-mode" : "light-mode");
-    };
-
-    applySystemTheme(); // Configura o tema inicial
-
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    mediaQuery.addEventListener("change", applySystemTheme); // Detecta alterações no tema
-
-    return () => {
-      mediaQuery.removeEventListener("change", applySystemTheme); // Limpeza
-    };
-  }, []);
-
-  useEffect(() => {
-    document.body.className = theme; // Aplica o tema dinamicamente
-  }, [theme]);
-
-  useEffect(() => {
-    searchMovies("Batman");
+    searchMovies("Marvel");
   }, []);
 
   const searchMovies = async (title) => {
     const response = await fetch(`${apiUrl}&s=${title}`);
     const data = await response.json();
-    setMovies(data.Search);
+    setMovies(data.Search || []);
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      searchMovies(search);
+    e.key === "Enter" && searchMovies(search);
+  };
+
+  const scroll = (direction, containerRef) => {
+    const scrollAmount = containerRef.current.offsetWidth / 2; // Ajustado para metade do tamanho visível
+    if (direction === "left") {
+      containerRef.current.scrollBy({
+        left: -scrollAmount,
+        behavior: "smooth",
+      });
+    } else if (direction === "right") {
+      containerRef.current.scrollBy({
+        left: scrollAmount,
+        behavior: "smooth",
+      });
     }
   };
 
@@ -61,154 +70,116 @@ const App = () => {
       />
 
       <div className="search mb-5">
-        <img
-          onClick={() => searchMovies(search)}
-          src={Lupa}
-          alt="Lupa"
-          style={{ cursor: "pointer", marginRight: "10px" }}
-        />
+        <img onClick={() => searchMovies(search)} src={Lupa} alt="Lupa" />
         <input
           onKeyDown={handleKeyPress}
           onChange={(e) => setSearch(e.target.value)}
           type="text"
           placeholder="Pesquise por título"
-          style={{
-            padding: "10px",
-            borderRadius: "5px",
-            border: "1px solid #ddd",
-            width: "300px",
-          }}
         />
       </div>
 
-      <div
-        className="imgInicial d-flex justify-content-center mt-5 mb-5"
-        style={{ paddingTop: "120px" }}
-      >
+      <div className="imgInicial d-flex justify-content-center mt-5 mb-5">
         <img
           src={ImgInicial}
           alt="Imagem inicial"
           className="img-fluid w-100"
-          style={{
-            maxWidth: "1600px",
-            objectFit: "cover",
-            height: "auto",
-            maxHeight: "700px",
-            minHeight: "300px",
-          }}
+          style={{ maxWidth: "1600px", objectFit: "cover", height: "auto" }}
         />
       </div>
 
-      {movies?.length > 0 ? (
-        <>
-          <h2 className="text-center text-light mb-4">Filmes encontrados:</h2>
-          <div className="container d-flex justify-content-center flex-wrap gap-3 mb-4">
-            {movies.map((movie, index) => (
-              <div
-                key={index}
-                style={{
-                  position: "relative",
-                  width: "300px",
-                  height: "400px",
-                  backgroundColor: "#222",
-                  borderRadius: "10px",
-                  overflow: "hidden",
-                  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
-                  textAlign: "center",
-                }}
-              >
-                <img
-                  src={movie.Poster}
-                  alt={movie.Title}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    filter: "brightness(50%)",
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-end",
-                    alignItems: "center",
-                    padding: "20px",
-                    background: "rgba(0, 0, 0, 0.5)",
-                  }}
-                >
-                  <h3
-                    style={{
-                      fontSize: "20px",
-                      fontWeight: "bold",
-                      color: "white",
-                      marginBottom: "15px",
-                    }}
-                  >
-                    {movie.Title}
-                  </h3>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      width: "100%",
-                      gap: "10px",
-                    }}
-                  >
-                    <button
-                      style={{
-                        flex: 1,
-                        background: "rgba(0, 0, 0, 0.6)",
-                        border: "none",
-                        color: "white",
-                        padding: "8px",
-                        fontSize: "12px",
-                        fontWeight: "bold",
-                        borderRadius: "5px",
-                        cursor: "pointer",
-                        backdropFilter: "blur(5px)",
-                        transition: "all 0.3s",
-                      }}
-                      onMouseOver={(e) => (e.target.style.background = "rgba(0, 0, 0, 0.8)")}
-                      onMouseOut={(e) => (e.target.style.background = "rgba(0, 0, 0, 0.6)")}
-                    >
-                      Assistir
-                    </button>
-                    <button
-                      style={{
-                        flex: 1,
-                        background: "rgba(0, 0, 0, 0.6)",
-                        border: "1px solid #fff",
-                        color: "white",
-                        padding: "8px",
-                        fontSize: "12px",
-                        fontWeight: "bold",
-                        borderRadius: "5px",
-                        cursor: "pointer",
-                        backdropFilter: "blur(5px)",
-                        transition: "all 0.3s",
-                      }}
-                      onMouseOver={(e) => (e.target.style.background = "rgba(0, 0, 0, 0.8)")}
-                      onMouseOut={(e) => (e.target.style.background = "rgba(0, 0, 0, 0.6)")}
-                    >
-                      Adicionar à Lista
-                    </button>
-                  </div>
+      {/* Primeira fileira de filmes */}
+      <div className="movie-section">
+        <h2 className="section-title">Os mais populares</h2>
+        <div className="movie-container" ref={movieContainerRefPopular}>
+          {movies.map((movie, index) => (
+            <MovieCard key={index} apiUrl={apiUrl} {...movie} />
+          ))}
+        </div>
+        <div className="scroll-controls">
+          <button
+            className="scroll-button left"
+            onClick={() => scroll("left", movieContainerRefPopular)}
+          >
+            &#10094;
+          </button>
+          <button
+            className="scroll-button right"
+            onClick={() => scroll("right", movieContainerRefPopular)}
+          >
+            &#10095;
+          </button>
+        </div>
+      </div>
+
+      {/* Segunda fileira de filmes */}
+      <div className="movie-section">
+        <h2 className="section-title">Você pode gostar</h2>
+        <div className="movie-container movie-container-limited" ref={movieContainerRefLiked}>
+          {movies.slice(0, 3).map((movie, index) => (
+            <div key={index} className="movie-card-custom">
+              <img
+                src={movie.Poster}
+                alt={movie.Title}
+                className="movie-card-image"
+              />
+              <div className="movie-card-overlay">
+                <h3 className="movie-title">{movie.Title}</h3>
+                <p className="movie-genre">Action, Drama</p>
+                <p className="movie-year-duration">{movie.Year} • 2h 35m</p>
+                <div className="movie-card-buttons">
+                  <button className="btn-watch-now">
+                    <span>&#9654;</span> Assista Agora
+                  </button>
+                  <button className="btn-watchlist">
+                    <span>&#43;</span> Adicionar na lista
+                  </button>
                 </div>
               </div>
-            ))}
-          </div>
-        </>
-      ) : (
-        <h2 className="text-center text-warning mt-4">
-          😢 Filme não encontrado 😢
-        </h2>
-      )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Terceira fileira de filmes */}
+      <div className="movie-section">
+        <h2 className="section-title">Filmes para você</h2>
+        <div className="movie-container" ref={movieContainerRefMoviesForYou}>
+          {movies.slice(0, 3).map((movie, index) => (
+            <div key={index} className="movie-card">
+              <div className="movie-info">
+                <h3>{movie.Title}</h3>
+                <p>{movie.Genre || "Action, Drama"}</p>
+                <p>{movie.Year} • 2h 35m</p>
+              </div>
+              <img src={movie.Poster} alt={movie.Title} className="movie-image" />
+              <div className="play-button">
+                <button>&#9658;</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Quarta fileira de filmes */}
+      <div className="movie-section">
+        <h2 className="section-title">Séries para você</h2>
+        <div className="movie-container" ref={movieContainerRefSeriesForYou}>
+          {movies.slice(0, 3).map((movie, index) => (
+            <div key={index} className="movie-card">
+              <div className="movie-info">
+                <h3>{movie.Title}</h3>
+                <p>{movie.Genre || "Action, Drama"}</p>
+                <p>{movie.Year} • 1 Season</p>
+              </div>
+              <img src={movie.Poster} alt={movie.Title} className="movie-image" />
+              <div className="play-button">
+                <button>&#9658;</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
       <Footer />
     </div>
