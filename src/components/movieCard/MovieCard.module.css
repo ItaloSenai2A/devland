@@ -1,13 +1,15 @@
 .movie {
-  width: 310px;
-  height: 460px;
+  flex: 0 0 auto; /* Garante que os cards não encolham */
+  width: 310px; /* Largura fixa do card */
+  height: 460px; /* Altura fixa do card */
   margin: 1.5rem;
   position: relative;
   overflow: hidden;
   border: 2px solid transparent;
   box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.4);
   border-radius: 10px;
-  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, filter 0.3s ease-in-out;
+  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out,
+    filter 0.3s ease-in-out;
   box-sizing: border-box;
   cursor: pointer;
 }
@@ -73,3 +75,4 @@
   background: none; /* Remover qualquer fundo atrás do texto */
   color: white; /* Manter o texto branco */
 }
+
