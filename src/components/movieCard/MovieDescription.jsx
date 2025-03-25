@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react'
-import styles from './MovieDescription.module.css'
+import { useEffect, useState } from "react";
+import styles from "./MovieDescription.module.css";
 import devFlix from "/favicon.png";
 
 const MovieDescription = (props) => {
-  const [movieDesc,setMovieDesc] = useState([])
+  const [movieDesc, setMovieDesc] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     fetch(`${props.apiUrl}&i=${props.movieID}`)
-    .then((response)=>response.json())
-    .then((data)=>setMovieDesc(data))
-    .catch((error) => console.error(error));
-  }, [])
+      .then((response) => response.json())
+      .then((data) => setMovieDesc(data))
+      .catch((error) => console.error(error));
+  }, []);
 
   return (
     <div className={styles.modalBackdrop} onClick={props.click}>
@@ -56,5 +56,5 @@ const MovieDescription = (props) => {
     </div>
   );
 };
-  
+
 export default MovieDescription;
