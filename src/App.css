@@ -194,3 +194,20 @@ body {
 }
 
 
+/* styles.css */
+:root {
+  --background-dark: #1a1a1a;
+  --background-light: #d4f4d2; /* Verde claro */
+  --text-dark: #f0f0f0;
+  --text-light: #000000;
+}
+
+body.dark-mode {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+body.light-mode {
+  background-color: var(--background-light);
+  color: var(--text-light);
+}
