@@ -31,14 +31,14 @@ const App = () => {
   const movieContainerRefSeriesForYou = useRef(null); // Referência para a quarta fileira de filmes
 
   const apiKey = "e4d577fa";
-  const apiUrl = https://omdbapi.com/?apikey=${apiKey};
+  const apiUrl = "https://omdbapi.com/?apikey=${apiKey}";
 
   useEffect(() => {
     searchMovies("Marvel");
   }, []);
 
   const searchMovies = async (title) => {
-    const response = await fetch(${apiUrl}&s=${title});
+    const response = await fetch(`${apiUrl}&s=${title}`);
     const data = await response.json();
     setMovies(data.Search || []);
   };
