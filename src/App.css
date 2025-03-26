@@ -539,6 +539,49 @@ body {
   color: black;
 }
 
+/* App.css */
+
+/* Estilo para a lupa */
+.search-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  background-color: transparent; /* Remove qualquer fundo */
+  border: none; /* Remove qualquer borda */
+}
+
+/* Estilo para o campo de entrada */
+.search-input {
+  width: 300px; /* Ajuste conforme necessário */
+  padding: 8px;
+  font-size: 16px;
+  border: none; /* Remove bordas finas */
+  outline: none; /* Remove o contorno ao selecionar */
+  background-color: transparent; /* Mantém o fundo limpo */
+}
+
+/* Estilo adicional para outros elementos */
+.movie-section {
+  margin-bottom: 50px;
+}
+
+.scroll-button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 24px;
+}
+
+.movie-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.movie-card {
+  margin-right: 20px;
+  flex: 0 0 auto;
+}
 
 
 
