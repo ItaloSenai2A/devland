@@ -6,6 +6,7 @@ import Logo from "./assets/capadosite.png";
 import Lupa from "./assets/search.svg";
 import ImgInicial from "./assets/ImgInicial.png";
 import "./scss/styles.scss";
+import MovieDescription from "./components/movieCard/MovieDescription";
 
 const App = () => {
   const toggleTheme = () => {
@@ -75,7 +76,11 @@ const App = () => {
     }
   };
 
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   return (
     <div id="app">
@@ -89,6 +94,7 @@ const App = () => {
       <div className="search mb-5">
         <img onClick={() => searchMovies(search)} src={Lupa} alt="Lupa" />
         <input
+          className="border-0"
           onKeyDown={handleKeyPress}
           onChange={(e) => setSearch(e.target.value)}
           type="text"
@@ -116,7 +122,7 @@ const App = () => {
       )}
 
       {/* First row of movies */}
-      <div className="movie-section">
+      <div className="w-100 d-flex justify-content-center align-items-center overflow-x-auto position-relative">
         <h2 className="section-title">Os mais populares</h2>
         <button
           className="scroll-button left"
@@ -124,7 +130,10 @@ const App = () => {
         >
           &#10094;
         </button>
-        <div className="movie-container" ref={movieContainerRefPopular}>
+        <div
+          className="scrollBarRemover d-flex gap-4 mt-3 py-3 overflow-x-auto"
+          ref={movieContainerRefPopular}
+        >
           {movies.map((movie, index) => (
             <MovieCard key={index} apiUrl={apiUrl} {...movie} />
           ))}
@@ -136,42 +145,53 @@ const App = () => {
           &#10095;
         </button>
       </div>
-
-{/* Second row of movies */}
-<div className="movie-section">
-  <h2 className="section-title">Você poderia gostar</h2>
-  <div
-    className="movie-container movie-container-limited"
-    ref={movieContainerRefLiked}
-  >
-    {movies.slice(0, 3).map((movie, index) => (
-      <div key={index} className="movie-card-custom">
-        <img
-          src={movie.Poster}
-          alt={movie.Title}
-          className="movie-card-image"
-        />
-        <div className="movie-card-overlay">
-          <h3 className="movie-title">{movie.Title}</h3>
-          <p className="movie-genre">Action, Drama</p>
-          <p className="movie-year-duration">{movie.Year} • 2h 35m</p>
-          <div className="movie-card-buttons">
-            {/* Somente o botão "Assistir agora" será exibido */}
-            <button className="btn-watch-now">
-              <span>&#9654;</span> Assistir agora
-            </button>
-          </div>
+      {/* --------------------------------------------------------------- */}
+      {/* Second row of movies */}
+      <div className="position-relative w-100 d-flex justify-content-center align-items-center overflow-x-auto">
+        <h2 className="section-title">Você poderia gostar</h2>
+        <div
+          className="scrollBarRemover w-100 m-0 p-0 d-flex justify-content-center gap-4 mt-3 py-3 overflow-x-auto"
+          ref={movieContainerRefLiked}
+        >
+          {movies.slice(0, 3).map((movie, index) => (
+            <div key={index} className="movie-card-custom">
+              <img
+                src={movie.Poster}
+                alt={movie.Title}
+                className="movie-card-image"
+                onClick={toggleModal}
+              />
+              {isModalOpen && (
+                <MovieDescription
+                  click={toggleModal}
+                  apiUrl={apiUrl}
+                  movieID={movie.imdbID}
+                />
+              )}
+              <div className="movie-card-overlay">
+                <h3 className="movie-title">{movie.Title}</h3>
+                <p className="movie-genre">Action, Drama</p>
+                <p className="movie-year-duration">{movie.Year} • 2h 35m</p>
+                <div className="movie-card-buttons">
+                  {/* Somente o botão "Assistir agora" será exibido */}
+                  <button className="btn-watch-now">
+                    <span>&#9654;</span> Assistir agora
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    ))}
-  </div>
-</div>
-
+      {/* --------------------------------------------------------------- */}
 
       {/* Third row of movies */}
-      <div className="movie-section">
+      <div className="position-relative w-100 d-flex justify-content-center align-items-center overflow-x-auto">
         <h2 className="section-title">Filmes para você</h2>
-        <div className="movie-container" ref={movieContainerRefMoviesForYou}>
+        <div
+          className="scrollBarRemover w-75 m-0 p-0 d-flex gap-4 mt-3 py-3 overflow-x-auto d-flex justify-content-center align-items-center"
+          ref={movieContainerRefMoviesForYou}
+        >
           {movies.slice(0, 3).map((movie, index) => (
             <div key={index} className="movie-card">
               <div className="movie-info">
@@ -193,11 +213,14 @@ const App = () => {
       </div>
 
       {/* Fourth row of movies */}
-      <div className="movie-section">
+      <div className="position-relative w-100 d-flex justify-content-center align-items-center overflow-x-auto">
         <h2 className="section-title">Séries para você</h2>
-        <div className="movie-container" ref={movieContainerRefSeriesForYou}>
+        <div
+          className="scrollBarRemover w-75 m-0 p-0 d-flex gap-4 mt-3 py-3 overflow-x-auto d-flex justify-content-center align-items-center"
+          ref={movieContainerRefSeriesForYou}
+        >
           {movies.slice(0, 3).map((movie, index) => (
-            <div key={index} className="movie-card">
+            <div key={index} className="movie-card ">
               <div className="movie-info">
                 <h3>{movie.Title}</h3>
                 <p>{movie.Genre || "Action, Drama"}</p>
