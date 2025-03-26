@@ -33,13 +33,13 @@ const MovieDescription = ({ click, apiUrl, movieID }) => {
             <h2>{movieData.Title}</h2>
             <p>{movieData.Plot}</p>
             <p>
-              <strong>Year:</strong> {movieData.Year}
+              <strong>Ano:</strong> {movieData.Year}
             </p>
             <p>
-              <strong>Genre:</strong> {movieData.Genre}
+              <strong>Gênero:</strong> {movieData.Genre}
             </p>
             <p>
-              <strong>Director:</strong> {movieData.Director}
+              <strong>Diretor:</strong> {movieData.Director}
             </p>
             <a
               href={googleSearchURL}
@@ -47,7 +47,7 @@ const MovieDescription = ({ click, apiUrl, movieID }) => {
               rel="noopener noreferrer"
               className={styles.watchButton}
             >
-              Watch Now
+              Assistir agora
             </a>
           </div>
         </div>
