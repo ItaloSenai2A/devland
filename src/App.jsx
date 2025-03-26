@@ -98,7 +98,7 @@ const App = () => {
           onKeyDown={handleKeyPress}
           onChange={(e) => setSearch(e.target.value)}
           type="text"
-          placeholder="Pesquise por título" // Texto traduzido para português
+          placeholder="Search by title"
         />
       </div>
 
@@ -245,3 +245,4 @@ const App = () => {
 };
 
 export default App;
+
