@@ -1,25 +1,22 @@
-/* Isso garante que o conteúdo ocupe toda a altura da página e o footer fique no final */
 html, body {
-  height: 100%;  /* Isso vai garantir que a altura total da página ocupe 100% */
+  height: 100%;  /* Garantir que a altura da página ocupe 100% */
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: column;  /* Flexbox para manter o conteúdo e o footer em uma coluna */
+  flex-direction: column;  /* Flexbox para alinhar o conteúdo e o footer em uma coluna */
 }
 
 .container {
-  flex: 1; /* O conteúdo ocupa o restante do espaço */
+  flex: 1; /* O conteúdo ocupa o restante do espaço disponível */
 }
 
 .footer {
   width: 100%;
-  height: 80px;  /* Altura padrão */
   background-color: #0a1128;
   color: white;
   text-align: center;
-  padding: 20px 0;
-  margin-top: auto;  /* Isso empurra o footer para o final da página */
-  position: relative;  /* Mantém ele dentro do fluxo do layout */
+  padding: 20px 0;  /* Padding de 20px em cima e embaixo */
+  position: relative;  /* Para que o conteúdo dentro do footer fique bem posicionado */
 }
 
 .content {
@@ -33,6 +30,11 @@ html, body {
   height: 60px;
 }
 
-p {
-  font-size: 12px; /* Ajuste para melhor equilíbrio */
+/* Adicionamos uma classe específica para o parágrafo no footer */
+.footer p {
+  font-size: 12px; /* Ajuste de tamanho para manter um bom equilíbrio */
+  position: absolute;  /* Para posicionar o texto sobre a faixa azul */
+  bottom: 10px;  /* Coloca o texto no fundo da faixa */
+  width: 100%;
+  margin: 0;  /* Remove qualquer margem indesejada */
 }
