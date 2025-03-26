@@ -4,6 +4,9 @@
 :root {
   --font-raleway: "Raleway", sans-serif;
   --font-inter: "Inter", sans-serif;
+  --background-image: url(./assets/backgroundDevLand.jpg);
+  --logo-image: url(./assets/capadosite.png);
+  --text-color: white;
 }
 
 * {

@@ -75,8 +75,6 @@ const App = () => {
     }
   };
 
-  
-
   return (
     <div id="app">
       <img
@@ -92,7 +90,7 @@ const App = () => {
           onKeyDown={handleKeyPress}
           onChange={(e) => setSearch(e.target.value)}
           type="text"
-          placeholder="Pesquise por título" // Texto traduzido para português
+          placeholder="Search by title"
         />
       </div>
 
@@ -117,7 +115,7 @@ const App = () => {
 
       {/* First row of movies */}
       <div className="movie-section">
-        <h2 className="section-title">Os mais populares</h2>
+        <h2 className="section-title">Most Popular</h2>
         <button
           className="scroll-button left"
           onClick={() => scroll("left", movieContainerRefPopular)}
@@ -139,7 +137,7 @@ const App = () => {
 
       {/* Second row of movies */}
       <div className="movie-section">
-        <h2 className="section-title">Você poderia gostar</h2>
+        <h2 className="section-title">You Might Like</h2>
         <div
           className="movie-container movie-container-limited"
           ref={movieContainerRefLiked}
@@ -157,10 +155,10 @@ const App = () => {
                 <p className="movie-year-duration">{movie.Year} • 2h 35m</p>
                 <div className="movie-card-buttons">
                   <button className="btn-watch-now">
-                    <span>&#9654;</span> Assistir agora
+                    <span>&#9654;</span> Watch Now
                   </button>
                   <button className="btn-watchlist">
-                    <span>&#43;</span> Adicionar na lista
+                    <span>&#43;</span> Add to Watchlist
                   </button>
                 </div>
               </div>
@@ -170,52 +168,61 @@ const App = () => {
       </div>
 
       {/* Third row of movies */}
-      <div className="movie-section">
-        <h2 className="section-title">Filmes para você</h2>
-        <div className="movie-container" ref={movieContainerRefMoviesForYou}>
-          {movies.slice(0, 3).map((movie, index) => (
-            <div key={index} className="movie-card">
-              <div className="movie-info">
-                <h3>{movie.Title}</h3>
-                <p>{movie.Genre || "Action, Drama"}</p>
-                <p>{movie.Year} • 2h 35m</p>
-              </div>
-              <img
-                src={movie.Poster}
-                alt={movie.Title}
-                className="movie-image"
-              />
-              <div className="play-button">
-                <button>&#9658;</button>
-              </div>
-            </div>
-          ))}
+<div className="movie-section">
+  <h2 className="section-title">Movies for You</h2>
+  <div className="movie-container" ref={movieContainerRefMoviesForYou}>
+    {movies.slice(0, 3).map((movie, index) => (
+      <div
+        key={index}
+        className="movie-card"
+        onClick={() => openModal(movie.imdbID)} // Adicionando evento de clique
+      >
+        <div className="movie-info">
+          <h3>{movie.Title}</h3>
+          <p>{movie.Genre || "Action, Drama"}</p>
+          <p>{movie.Year} • 2h 35m</p>
+        </div>
+        <img
+          src={movie.Poster}
+          alt={movie.Title}
+          className="movie-image"
+        />
+        <div className="play-button">
+          <button>&#9658;</button>
         </div>
       </div>
+    ))}
+  </div>
+</div>
 
-      {/* Fourth row of movies */}
-      <div className="movie-section">
-        <h2 className="section-title">Séries para você</h2>
-        <div className="movie-container" ref={movieContainerRefSeriesForYou}>
-          {movies.slice(0, 3).map((movie, index) => (
-            <div key={index} className="movie-card">
-              <div className="movie-info">
-                <h3>{movie.Title}</h3>
-                <p>{movie.Genre || "Action, Drama"}</p>
-                <p>{movie.Year} • 1 Season</p>
-              </div>
-              <img
-                src={movie.Poster}
-                alt={movie.Title}
-                className="movie-image"
-              />
-              <div className="play-button">
-                <button>&#9658;</button>
-              </div>
-            </div>
-          ))}
+{/* Fourth row of movies */}
+<div className="movie-section">
+  <h2 className="section-title">Series for You</h2>
+  <div className="movie-container" ref={movieContainerRefSeriesForYou}>
+    {movies.slice(0, 3).map((movie, index) => (
+      <div
+        key={index}
+        className="movie-card"
+        onClick={() => openModal(movie.imdbID)} // Adicionando evento de clique
+      >
+        <div className="movie-info">
+          <h3>{movie.Title}</h3>
+          <p>{movie.Genre || "Action, Drama"}</p>
+          <p>{movie.Year} • 1 Season</p>
+        </div>
+        <img
+          src={movie.Poster}
+          alt={movie.Title}
+          className="movie-image"
+        />
+        <div className="play-button">
+          <button>&#9658;</button>
         </div>
       </div>
+    ))}
+  </div>
+</div>
+
 
       <Footer />
     </div>
