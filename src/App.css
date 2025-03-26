@@ -227,23 +227,25 @@ body {
   color: white;
   font-size: 1.8rem;
   position: absolute;
-  top: 30px; /* Coloca o título mais para cima */
-  left: 20px; /* Coloca o título no canto esquerdo */
+  top: -5px; /* Mantém o título mais para cima */
+  left: 20px;
   z-index: 15;
-  margin-bottom: 20px; /* Dá um pequeno espaço entre o título e os cards */
+  margin-bottom: 200px; /* Aumenta bastante o espaço entre o título e os cards */
 }
 
 /* Estilo para o container dos filmes */
 .movie-container {
   display: flex;
-  justify-content: center; /* Alinha os cards no centro */
+  justify-content: center;
   gap: 15px;
   padding: 20px 0;
-  margin-top: 50px; /* Ajuste de espaço entre o título e os cards */
-  transition: transform 0.5s ease-in-out; /* Adiciona a animação de deslizamento */
+  margin-top: 200px; /* Aumenta mais ainda o espaço entre o título e os cards */
+  transition: transform 0.5s ease-in-out;
   overflow-x: hidden;
-  width: 100%; /* Ajuste para ocupar 100% da largura */
+  width: 100%;
 }
+
+
 
 /* Estilo dos botões de rolagem */
 .scroll-button {
