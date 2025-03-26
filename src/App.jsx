@@ -5,6 +5,7 @@ import MovieCard from "./components/movieCard/MovieCard";
 import Logo from "./assets/capadosite.png";
 import Lupa from "./assets/search.svg";
 import ImgInicial from "./assets/ImgInicial.png";
+import "./scss/styles.scss";
 
 const App = () => {
   const toggleTheme = () => {
@@ -17,40 +18,50 @@ const App = () => {
 
   toggleTheme();
 
-  // Automatically adds the theme change event
   window
     .matchMedia("(prefers-color-scheme: dark")
     .addEventListener("change", toggleTheme);
 
   const [search, setSearch] = useState("");
   const [movies, setMovies] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [error, setError] = useState(null); // Estado para erro
 
-  // References for movie rows
-  const movieContainerRefPopular = useRef(null); // Reference for the first row of movies
-  const movieContainerRefLiked = useRef(null); // Reference for the second row of movies
-  const movieContainerRefMoviesForYou = useRef(null); // Reference for the third row of movies
-  const movieContainerRefSeriesForYou = useRef(null); // Reference for the fourth row of movies
+  const movieContainerRefPopular = useRef(null);
+  const movieContainerRefLiked = useRef(null);
+  const movieContainerRefMoviesForYou = useRef(null);
+  const movieContainerRefSeriesForYou = useRef(null);
 
   const apiKey = "e4d577fa";
   const apiUrl = `https://omdbapi.com/?apikey=${apiKey}`;
 
-  // Define a função antes do useEffect
   const searchMovies = async (title) => {
     const response = await fetch(`${apiUrl}&s=${title}`);
     const data = await response.json();
-    setMovies(data.Search || []);
+
+    // Verifica se não encontrou nenhum filme
+    if (data.Response === "False") {
+      setMovies([]);
+      setError("Nenhum filme encontrado");
+    } else {
+      setMovies(data.Search || []);
+      setError(null); // Limpa o erro caso haja resultados
+    }
   };
 
   useEffect(() => {
     searchMovies("Marvel");
-  }, []); // Remova a dependência de `searchMovies` para evitar o erro
+  }, []);
 
   const handleKeyPress = (e) => {
-    e.key === "Enter" && searchMovies(search);
+    if (e.key === "Enter") {
+      searchMovies(search);
+      setIsSearching(true);
+    }
   };
 
   const scroll = (direction, containerRef) => {
-    const scrollAmount = containerRef.current.offsetWidth; // Visible width of the container
+    const scrollAmount = containerRef.current.offsetWidth;
     if (direction === "left") {
       containerRef.current.scrollBy({
         left: -scrollAmount,
@@ -85,14 +96,24 @@ const App = () => {
         />
       </div>
 
-      <div className="initialImage d-flex justify-content-center mt-5 mb-5">
-        <img
-          src={ImgInicial}
-          alt="Initial image"
-          className="img-fluid w-100"
-          style={{ maxWidth: "1600px", objectFit: "cover", height: "auto" }}
-        />
-      </div>
+      {/* Renderiza a imagem inicial apenas se não estiver pesquisando */}
+      {!isSearching && !error && (
+        <div className="initialImage d-flex justify-content-center mt-5 mb-5">
+          <img
+            src={ImgInicial}
+            alt="Initial image"
+            className="img-fluid w-100"
+            style={{ maxWidth: "1600px", objectFit: "cover", height: "auto" }}
+          />
+        </div>
+      )}
+
+      {/* Exibe a mensagem de erro se nenhum filme for encontrado */}
+      {error && (
+        <div className="error-message text-center mt-5 mb-5">
+          <h3>{error}</h3>
+        </div>
+      )}
 
       {/* First row of movies */}
       <div className="movie-section">
@@ -126,7 +147,7 @@ const App = () => {
           {movies.slice(0, 3).map((movie, index) => (
             <div key={index} className="movie-card-custom">
               <img
-                src={movie.Poster} // Replace with the correct poster path
+                src={movie.Poster}
                 alt={movie.Title}
                 className="movie-card-image"
               />
