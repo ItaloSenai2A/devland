@@ -4,8 +4,6 @@ import Footer from "./components/footer/Footer";
 import MovieCard from "./components/movieCard/MovieCard";
 import Logo from "./assets/capadosite.png";
 import Lupa from "./assets/search.svg";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.js";
 import ImgInicial from "./assets/ImgInicial.png";
 
 const App = () => {
@@ -33,14 +31,14 @@ const App = () => {
   const movieContainerRefSeriesForYou = useRef(null); // Referência para a quarta fileira de filmes
 
   const apiKey = "e4d577fa";
-  const apiUrl = `https://omdbapi.com/?apikey=${apiKey}`;
+  const apiUrl = https://omdbapi.com/?apikey=${apiKey};
 
   useEffect(() => {
     searchMovies("Marvel");
   }, []);
 
   const searchMovies = async (title) => {
-    const response = await fetch(`${apiUrl}&s=${title}`);
+    const response = await fetch(${apiUrl}&s=${title});
     const data = await response.json();
     setMovies(data.Search || []);
   };
