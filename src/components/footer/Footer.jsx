@@ -2,7 +2,7 @@ import styles from "./Footer.module.css";
 
 const Footer = () => {
   return (
-    <footer className={`footer ${styles.footer}`}>
+    <footer className={styles.footer}>
       <div className={styles.content}>
         <img
           src="/DevLandLogo.png"
@@ -14,4 +14,5 @@ const Footer = () => {
     </footer>
   );
 };
+
 export default Footer;

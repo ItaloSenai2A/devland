@@ -4,8 +4,6 @@ import Footer from "./components/footer/Footer";
 import MovieCard from "./components/movieCard/MovieCard";
 import Logo from "./assets/capadosite.png";
 import Lupa from "./assets/search.svg";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.js";
 import ImgInicial from "./assets/ImgInicial.png";
 
 const App = () => {
@@ -13,14 +11,14 @@ const App = () => {
   const [movies, setMovies] = useState([]);
 
   const apiKey = "e4d577fa";
-  const apiUrl = `https://omdbapi.com/?apikey=${apiKey}`;
+  const apiUrl = https://omdbapi.com/?apikey=${apiKey};
 
   useEffect(() => {
     searchMovies("Batman");
   }, []);
 
   const searchMovies = async (title) => {
-    const response = await fetch(`${apiUrl}&s=${title}`);
+    const response = await fetch(${apiUrl}&s=${title});
     const data = await response.json();
     setMovies(data.Search);
   };
@@ -67,7 +65,7 @@ const App = () => {
       </div>
 
       {movies?.length > 0 ? (
-        <div className="container d-flex justify-content-center flex-wrap gap-3 mb-4"> {/* Adicionando mb-4 aqui */}
+        <div className="container d-flex justify-content-center flex-wrap gap-3 mb-4">
           {movies.map((movie, index) => (
             <MovieCard key={index} apiUrl={apiUrl} {...movie} />
           ))}
@@ -76,18 +74,8 @@ const App = () => {
         <h2 className="text-center text-warning mt-4">😢 Filme não encontrado 😢</h2>
       )}
 
-      {/* Footer */}
-      <footer className="text-center py-4" style={{ fontSize: "20px", fontWeight: "bolder", color: "#f9d3b4" }}>
-        <p>
-          Desenvolvido com 🤍 por{" "}
-          <a href="https://github.com/ItaloSenai2A" style={{ textDecoration: "none", color: "#f9d3b4" }}>
-            Ítalo Francesco
-          </a>
-        </p>
-        <p>
-          <i className="bi bi-heart-fill" style={{ color: "#ff0000" }}></i>{" "}
-        </p>
-      </footer>
+      {/* O Footer agora vai estar sempre fixado no final do conteúdo */}
+      <Footer />
     </div>
   );
 };
