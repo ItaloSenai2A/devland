@@ -75,6 +75,8 @@ const App = () => {
     }
   };
 
+  
+
   return (
     <div id="app">
       <img
@@ -90,7 +92,7 @@ const App = () => {
           onKeyDown={handleKeyPress}
           onChange={(e) => setSearch(e.target.value)}
           type="text"
-          placeholder="Search by title"
+          placeholder="Pesquise por título" // Texto traduzido para português
         />
       </div>
 
@@ -115,7 +117,7 @@ const App = () => {
 
       {/* First row of movies */}
       <div className="movie-section">
-        <h2 className="section-title">Most Popular</h2>
+        <h2 className="section-title">Os mais populares</h2>
         <button
           className="scroll-button left"
           onClick={() => scroll("left", movieContainerRefPopular)}
@@ -137,7 +139,7 @@ const App = () => {
 
       {/* Second row of movies */}
       <div className="movie-section">
-        <h2 className="section-title">You Might Like</h2>
+        <h2 className="section-title">Você poderia gostar</h2>
         <div
           className="movie-container movie-container-limited"
           ref={movieContainerRefLiked}
@@ -155,10 +157,10 @@ const App = () => {
                 <p className="movie-year-duration">{movie.Year} • 2h 35m</p>
                 <div className="movie-card-buttons">
                   <button className="btn-watch-now">
-                    <span>&#9654;</span> Watch Now
+                    <span>&#9654;</span> Assistir agora
                   </button>
                   <button className="btn-watchlist">
-                    <span>&#43;</span> Add to Watchlist
+                    <span>&#43;</span> Adicionar na lista
                   </button>
                 </div>
               </div>
@@ -169,7 +171,7 @@ const App = () => {
 
       {/* Third row of movies */}
       <div className="movie-section">
-        <h2 className="section-title">Movies for You</h2>
+        <h2 className="section-title">Filmes para você</h2>
         <div className="movie-container" ref={movieContainerRefMoviesForYou}>
           {movies.slice(0, 3).map((movie, index) => (
             <div key={index} className="movie-card">
@@ -193,7 +195,7 @@ const App = () => {
 
       {/* Fourth row of movies */}
       <div className="movie-section">
-        <h2 className="section-title">Series for You</h2>
+        <h2 className="section-title">Séries para você</h2>
         <div className="movie-container" ref={movieContainerRefSeriesForYou}>
           {movies.slice(0, 3).map((movie, index) => (
             <div key={index} className="movie-card">
