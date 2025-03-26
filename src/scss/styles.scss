@@ -176,4 +176,9 @@ $utilities: map-merge(
   )
 );
 
+:root {
+  @each $color-name, $color-value in $all-custom-colors {
+    --#{$color-name}: #{$color-value};
+  }
+}
 @import "bootstrap/scss/utilities/api";
