@@ -14,15 +14,43 @@ const MovieDescription = ({ click, apiUrl, movieID }) => {
     return <div className={styles.loading}>Loading...</div>;
   }
 
+  // Create the Google search URL
+  const googleSearchURL = `https://www.google.com/search?q=${movieData.Title} movie`;
+
   return (
     <div className={styles.modalBackground} onClick={click}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <button className={styles.closeButton} onClick={click}>X</button>
-        <h2>{movieData.Title}</h2>
-        <p>{movieData.Plot}</p>
-        <p><strong>Year:</strong> {movieData.Year}</p>
-        <p><strong>Genre:</strong> {movieData.Genre}</p>
-        <p><strong>Director:</strong> {movieData.Director}</p>
+        <button className={styles.closeButton} onClick={click}>
+          X
+        </button>
+        <div className={styles.modalContent}>
+          <img
+            className={styles.movieImage}
+            src={movieData.Poster}
+            alt={movieData.Title}
+          />
+          <div className={styles.movieDetails}>
+            <h2>{movieData.Title}</h2>
+            <p>{movieData.Plot}</p>
+            <p>
+              <strong>Year:</strong> {movieData.Year}
+            </p>
+            <p>
+              <strong>Genre:</strong> {movieData.Genre}
+            </p>
+            <p>
+              <strong>Director:</strong> {movieData.Director}
+            </p>
+            <a
+              href={googleSearchURL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.watchButton}
+            >
+              Watch Now
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );

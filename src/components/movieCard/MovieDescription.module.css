@@ -4,30 +4,101 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8); /* Aumenta a opacidade do fundo */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  overflow: hidden; /* Impede rolagem quando o modal estiver aberto */
+  animation: fadeIn 0.3s ease-out; /* Animação suave para aparecer */
 }
 
 .modal {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  width: 50%;
-  max-width: 600px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background: #121212; /* Fundo escuro para o modal */
+  color: #fff; /* Texto branco para contraste */
+  padding: 30px;
+  border-radius: 12px;
+  width: 60%;
+  max-width: 800px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
   position: relative;
   text-align: center;
+  animation: slideIn 0.5s ease-out; /* Animação suave para entrar */
 }
 
 .closeButton {
   position: absolute;
-  top: 10px;
+  top: 15px;
   right: 15px;
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 20px;
+  color: #fff;
   cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.closeButton:hover {
+  color: #ff5733; /* Cor de hover para o botão de fechar */
+}
+
+.movieImage {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  object-fit: cover; /* Mantém a proporção da imagem */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movieDetails {
+  margin-top: 20px;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.watchButton {
+  margin-top: 40px; /* Maior espaçamento entre as informações do filme e o botão */
+  padding: 12px 25px;
+  background-color: #007bff; /* Azul para o botão */
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.watchButton:hover {
+  background-color: #0056b3; /* Cor de hover para o botão azul */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
