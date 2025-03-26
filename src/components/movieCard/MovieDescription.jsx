@@ -1,60 +1,31 @@
-import { useEffect, useState } from 'react'
-import styles from './MovieDescription.module.css'
-import devFlix from "/favicon.png";
+import { useEffect, useState } from "react";
+import styles from "./MovieDescription.module.css";
 
-const MovieDescription = (props) => {
-  const [movieDesc,setMovieDesc] = useState([])
+const MovieDescription = ({ click, apiUrl, movieID }) => {
+  const [movieData, setMovieData] = useState(null);
 
-  useEffect(()=>{
-    fetch(`${props.apiUrl}&i=${props.movieID}`)
-    .then((response)=>response.json())
-    .then((data)=>setMovieDesc(data))
-    .catch((error) => console.error(error));
-  }, [])
+  useEffect(() => {
+    fetch(`${apiUrl}&i=${movieID}`)
+      .then((response) => response.json())
+      .then((data) => setMovieData(data));
+  }, [apiUrl, movieID]);
+
+  if (!movieData) {
+    return <div className={styles.loading}>Loading...</div>;
+  }
 
   return (
-    <div className={styles.modalBackdrop} onClick={props.click}>
-      <div className={styles.movieModal} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.movieInfo}>
-          <img
-            src={movieDesc.Poster}
-            alt={`Imagem da capa do filme ${movieDesc.Title}`}
-          />
-          <button className={styles.btnClose} onClick={props.click}>
-            X
-          </button>
-          <div className={styles.movieType}>
-            <div>
-              <img src={devFlix} alt="" />
-              {movieDesc.Type}
-              <h1>{movieDesc.Title}</h1>
-              <a
-                href={`https://google.com/search?q=${encodeURIComponent(
-                  movieDesc.Title
-                )}`}
-                target="_blank"
-              >
-                ▶️ Assistir
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className={styles.containerMisc}>
-          <div className={styles.containerFlex}>
-            Avaliação: {movieDesc.imdbRating} | Duração: {movieDesc.Runtime} |{" "}
-            {movieDesc.Released}
-          </div>
-          <div className={styles.containerFlex}>
-            <p>Elenco: {movieDesc.Actors}</p>
-            <p>Gênero: {movieDesc.Genre}</p>
-          </div>
-        </div>
-        <div className={styles.desc}>
-          <p>Sinopse: {movieDesc.Plot}</p>
-        </div>
+    <div className={styles.modalBackground} onClick={click}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+        <button className={styles.closeButton} onClick={click}>X</button>
+        <h2>{movieData.Title}</h2>
+        <p>{movieData.Plot}</p>
+        <p><strong>Year:</strong> {movieData.Year}</p>
+        <p><strong>Genre:</strong> {movieData.Genre}</p>
+        <p><strong>Director:</strong> {movieData.Director}</p>
       </div>
     </div>
   );
 };
-  
+
 export default MovieDescription;
