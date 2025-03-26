@@ -522,13 +522,16 @@ body {
 
 .play-button button {
   background: rgba(0, 0, 0, 0.8); /* Fundo preto semitransparente */
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 60px; /* Botão maior permanece centralizado no card menor */
-  height: 60px;
-  font-size: 24px; /* Tamanho do ícone do botão permanece grande */
-  cursor: pointer;
+  color: white; /* Cor do ícone */
+  border: none; /* Remove bordas */
+  border-radius: 50%; /* Deixa o botão em formato de círculo */
+  width: 60px; /* Largura do botão */
+  height: 60px; /* Altura do botão */
+  display: flex; /* Garante centralização do conteúdo interno */
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
+  font-size: 1.5rem; /* Diminui o tamanho do ícone */
+  cursor: pointer; /* Mostra que o botão é clicável */
 }
 
 .play-button button:hover {
