@@ -30,9 +30,12 @@ body {
 
 
 #app {
+  padding: 4em 4em 0 4em;
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Garante que a altura do app ocupe toda a tela */
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
 }
 
 .search {
@@ -527,8 +530,7 @@ body {
   display: flex; /* Garante centralização do conteúdo interno */
   align-items: center; /* Centraliza verticalmente */
   justify-content: center; /* Centraliza horizontalmente */
-  font-size: 2rem; /* Tamanho do ícone */
-  line-height: 2.5rem; /* Aumenta a altura do ícone */
+  font-size: 1.5rem; /* Diminui o tamanho do ícone */
   cursor: pointer; /* Mostra que o botão é clicável */
 }
 
