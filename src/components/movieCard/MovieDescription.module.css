@@ -64,17 +64,18 @@ h2 {
 
 p {
   font-size: 1rem;
-  margin-bottom: 10px;
+  margin-bottom: 30px; /* Aumenta o espaçamento entre a descrição e o botão */
 }
 
 .watchButton {
-  margin-top: 40px; /* Maior espaçamento entre as informações do filme e o botão */
+  margin-top: 30px; /* Ajusta o espaçamento entre a descrição e o botão */
   padding: 12px 25px;
   background-color: #007bff; /* Azul para o botão */
   color: white;
   text-decoration: none;
   border-radius: 6px;
   font-size: 1.1rem;
+  font-weight: bold; /* Deixa o texto em negrito */
   transition: background-color 0.3s ease;
 }
 
@@ -102,3 +103,5 @@ p {
     opacity: 1;
   }
 }
+
+

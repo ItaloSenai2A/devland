@@ -135,37 +135,36 @@ const App = () => {
         </button>
       </div>
 
-      {/* Second row of movies */}
-      <div className="movie-section">
-        <h2 className="section-title">You Might Like</h2>
-        <div
-          className="movie-container movie-container-limited"
-          ref={movieContainerRefLiked}
-        >
-          {movies.slice(0, 3).map((movie, index) => (
-            <div key={index} className="movie-card-custom">
-              <img
-                src={movie.Poster}
-                alt={movie.Title}
-                className="movie-card-image"
-              />
-              <div className="movie-card-overlay">
-                <h3 className="movie-title">{movie.Title}</h3>
-                <p className="movie-genre">Action, Drama</p>
-                <p className="movie-year-duration">{movie.Year} • 2h 35m</p>
-                <div className="movie-card-buttons">
-                  <button className="btn-watch-now">
-                    <span>&#9654;</span> Watch Now
-                  </button>
-                  <button className="btn-watchlist">
-                    <span>&#43;</span> Add to Watchlist
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+{/* Second row of movies */}
+<div className="movie-section">
+  <h2 className="section-title">Você poderia gostar</h2>
+  <div
+    className="movie-container movie-container-limited"
+    ref={movieContainerRefLiked}
+  >
+    {movies.slice(0, 3).map((movie, index) => (
+      <div key={index} className="movie-card-custom">
+        <img
+          src={movie.Poster}
+          alt={movie.Title}
+          className="movie-card-image"
+        />
+        <div className="movie-card-overlay">
+          <h3 className="movie-title">{movie.Title}</h3>
+          <p className="movie-genre">Action, Drama</p>
+          <p className="movie-year-duration">{movie.Year} • 2h 35m</p>
+          <div className="movie-card-buttons">
+            {/* Somente o botão "Assistir agora" será exibido */}
+            <button className="btn-watch-now">
+              <span>&#9654;</span> Assistir agora
+            </button>
+          </div>
         </div>
       </div>
+    ))}
+  </div>
+</div>
+
 
       {/* Third row of movies */}
 <div className="movie-section">

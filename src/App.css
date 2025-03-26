@@ -537,6 +537,30 @@ body {
   filter: brightness(0.7); /* Escurece ligeiramente no hover */
 }
 
+.btn-watch-now {
+  background-color: black;
+  color: white;
+  padding: 10px 20px; /* Botões menores */
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px; /* Fonte reduzida */
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+  position: absolute; /* Posiciona o botão absolutamente dentro do card */
+  bottom: 16px; /* Distância do fundo do card */
+  left: 50%; /* Centraliza o botão horizontalmente */
+  transform: translateX(-50%); /* Ajuste para centralizar o botão */
+}
+
+
+
+
+
+
+
 
 
 
