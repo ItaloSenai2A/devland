@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./App.css";
 import Footer from "./components/footer/Footer";
 import MovieCard from "./components/movieCard/MovieCard";
@@ -7,48 +7,50 @@ import Lupa from "./assets/search.svg";
 import ImgInicial from "./assets/ImgInicial.png";
 
 const App = () => {
-  const mudaTema = () => {
-    const tema = window.matchMedia("(prefers-color-scheme: dark)").matches
+  const toggleTheme = () => {
+    const theme = window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
 
-    document.documentElement.setAttribute("data-bs-theme", tema);
+    document.documentElement.setAttribute("data-bs-theme", theme);
   };
 
-  mudaTema();
+  toggleTheme();
 
-  // Adiciona o evento de mudança de tema automaticamente
-  window.matchMedia("(prefers-color-scheme: dark")
-  .addEventListener("change", mudaTema);
+  // Automatically adds the theme change event
+  window
+    .matchMedia("(prefers-color-scheme: dark")
+    .addEventListener("change", toggleTheme);
 
   const [search, setSearch] = useState("");
   const [movies, setMovies] = useState([]);
 
-  // Referências para as fileiras de filmes
-  const movieContainerRefPopular = useRef(null); // Referência para a primeira fileira de filmes
-  const movieContainerRefLiked = useRef(null); // Referência para a segunda fileira de filmes
-  const movieContainerRefMoviesForYou = useRef(null); // Referência para a terceira fileira de filmes
-  const movieContainerRefSeriesForYou = useRef(null); // Referência para a quarta fileira de filmes
+  // References for movie rows
+  const movieContainerRefPopular = useRef(null); // Reference for the first row of movies
+  const movieContainerRefLiked = useRef(null); // Reference for the second row of movies
+  const movieContainerRefMoviesForYou = useRef(null); // Reference for the third row of movies
+  const movieContainerRefSeriesForYou = useRef(null); // Reference for the fourth row of movies
 
   const apiKey = "e4d577fa";
-  const apiUrl = "https://omdbapi.com/?apikey=${apiKey}";
+  const apiUrl = `https://omdbapi.com/?apikey=${apiKey}`;
 
-  useEffect(() => {
-    searchMovies("Marvel");
-  }, []);
-
+  // Define a função antes do useEffect
   const searchMovies = async (title) => {
     const response = await fetch(`${apiUrl}&s=${title}`);
     const data = await response.json();
     setMovies(data.Search || []);
   };
 
+  useEffect(() => {
+    searchMovies("Marvel");
+  }, []); // Remova a dependência de `searchMovies` para evitar o erro
+
   const handleKeyPress = (e) => {
     e.key === "Enter" && searchMovies(search);
   };
 
   const scroll = (direction, containerRef) => {
-    const scrollAmount = containerRef.current.offsetWidth; // Largura visível do contêiner
+    const scrollAmount = containerRef.current.offsetWidth; // Visible width of the container
     if (direction === "left") {
       containerRef.current.scrollBy({
         left: -scrollAmount,
@@ -77,22 +79,22 @@ const App = () => {
           onKeyDown={handleKeyPress}
           onChange={(e) => setSearch(e.target.value)}
           type="text"
-          placeholder="Pesquise por título"
+          placeholder="Search by title"
         />
       </div>
 
-      <div className="imgInicial d-flex justify-content-center mt-5 mb-5">
+      <div className="initialImage d-flex justify-content-center mt-5 mb-5">
         <img
           src={ImgInicial}
-          alt="Imagem inicial"
+          alt="Initial image"
           className="img-fluid w-100"
           style={{ maxWidth: "1600px", objectFit: "cover", height: "auto" }}
         />
       </div>
 
-      {/* Primeira fileira de filmes */}
+      {/* First row of movies */}
       <div className="movie-section">
-        <h2 className="section-title">Os mais populares</h2>
+        <h2 className="section-title">Most Popular</h2>
         <button
           className="scroll-button left"
           onClick={() => scroll("left", movieContainerRefPopular)}
@@ -112,9 +114,9 @@ const App = () => {
         </button>
       </div>
 
-      {/* Segunda fileira de filmes */}
+      {/* Second row of movies */}
       <div className="movie-section">
-        <h2 className="section-title">Você pode gostar</h2>
+        <h2 className="section-title">You Might Like</h2>
         <div
           className="movie-container movie-container-limited"
           ref={movieContainerRefLiked}
@@ -122,7 +124,7 @@ const App = () => {
           {movies.slice(0, 3).map((movie, index) => (
             <div key={index} className="movie-card-custom">
               <img
-                src={movie.Poster} // Substitua pelo caminho correto do poster
+                src={movie.Poster} // Replace with the correct poster path
                 alt={movie.Title}
                 className="movie-card-image"
               />
@@ -132,10 +134,10 @@ const App = () => {
                 <p className="movie-year-duration">{movie.Year} • 2h 35m</p>
                 <div className="movie-card-buttons">
                   <button className="btn-watch-now">
-                    <span>&#9654;</span> Assista Agora
+                    <span>&#9654;</span> Watch Now
                   </button>
                   <button className="btn-watchlist">
-                    <span>&#43;</span> Adicionar na lista
+                    <span>&#43;</span> Add to Watchlist
                   </button>
                 </div>
               </div>
@@ -144,9 +146,9 @@ const App = () => {
         </div>
       </div>
 
-      {/* Terceira fileira de filmes */}
+      {/* Third row of movies */}
       <div className="movie-section">
-        <h2 className="section-title">Filmes para você</h2>
+        <h2 className="section-title">Movies for You</h2>
         <div className="movie-container" ref={movieContainerRefMoviesForYou}>
           {movies.slice(0, 3).map((movie, index) => (
             <div key={index} className="movie-card">
@@ -168,9 +170,9 @@ const App = () => {
         </div>
       </div>
 
-      {/* Quarta fileira de filmes */}
+      {/* Fourth row of movies */}
       <div className="movie-section">
-        <h2 className="section-title">Séries para você</h2>
+        <h2 className="section-title">Series for You</h2>
         <div className="movie-container" ref={movieContainerRefSeriesForYou}>
           {movies.slice(0, 3).map((movie, index) => (
             <div key={index} className="movie-card">
