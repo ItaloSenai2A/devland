@@ -19,7 +19,6 @@
   --bs-body-bg: rgb(171, 195, 255);
 }
 
-
 [data-bs-theme="dark"] {
   --bs-body-bg: rgb(20, 52, 120);
 }
@@ -30,7 +29,6 @@ body {
   background-size: cover;
   overflow-x: hidden;
 }
-
 
 #app {
   padding: 4em 4em 0 4em;
@@ -97,14 +95,6 @@ body {
   justify-content: center;
   align-items: center;
   overflow-x: auto;
-  width: 100%;
-}
-
-.movie-container {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-  margin-top: 60px; /* Espaço extra entre o título e os cards */
 }
 
 .movie {
@@ -237,18 +227,6 @@ body {
 }
 
 /* Estilo para o container dos filmes */
-.movie-container {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  padding: 20px 0;
-  margin-top: 200px; /* Aumenta mais ainda o espaço entre o título e os cards */
-  transition: transform 0.5s ease-in-out;
-  overflow-x: hidden;
-  width: 100%;
-}
-
-
 
 /* Estilo dos botões de rolagem */
 .scroll-button {
@@ -297,36 +275,13 @@ body {
   margin-right: 10px;
 }
 
-/* Estilo para o container dos filmes */
-.movie-container {
-  display: flex;
-  gap: 15px;
-  padding: 20px 0;
-  margin-top: 50px;
-  overflow-x: auto; /* Permite rolagem horizontal */
-  width: 100%; /* O contêiner ocupa 100% da largura */
-  scroll-behavior: smooth; /* Garante que a rolagem seja suave */
-  max-width: calc(
-    310px * 4 + 15px * 3
-  ); /* Limita a largura para exibir 4 cards */
-  margin: 0 auto; /* Centraliza o contêiner */
-}
-
-.movie-container::-webkit-scrollbar {
+.scrollBarRemover::-webkit-scrollbar {
   display: none; /* Oculta a barra de rolagem para um visual mais limpo */
 }
 
 .movie-card-custom {
-  background-color: #1e1e1e;
-  color: white;
-  border-radius: 10px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  width: 40%; /* Largura mais espaçosa */
-  margin: 20px auto; /* Centraliza o card horizontalmente */
   font-family: Arial, sans-serif;
-  position: relative; /* Necessário para o overlay */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave para o zoom */
 }
 
 .movie-card-custom:hover {
@@ -367,7 +322,6 @@ body {
   justify-content: space-between;
   margin-top: 15px;
 }
-
 
 .btn-watch-now {
   background-color: black;
@@ -417,20 +371,9 @@ body {
   border: 2px solid black; /* Contorno preto ao passar o mouse */
 }
 
-.movie-container {
-  display: flex;
-  gap: 20px;
-  padding: 20px 0;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-}
-
 .movie-card {
-  position: relative;
   width: 400px; /* Largura reduzida */
   height: 190px; /* Altura reduzida */
-  border-radius: 10px;
-  overflow: hidden;
   background: #1e1e1e; /* Fundo padrão para contraste */
 }
 
@@ -441,11 +384,14 @@ body {
   width: 100%;
   padding: 15px;
   color: white;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.0)); /* Gradiente que diminui a intensidade */
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8),
+    rgba(0, 0, 0, 0)
+  ); /* Gradiente que diminui a intensidade */
   z-index: 2;
   box-shadow: none; /* Retira qualquer sombra adicional */
 }
-
 
 .movie-info h3 {
   margin: 0;
@@ -495,14 +441,6 @@ body {
   transform: scale(1.1); /* Aumenta ao passar o mouse */
 }
 
-.movie-container {
-  display: flex;
-  gap: 20px; /* Espaçamento entre os cards */
-  padding: 0 20px; /* Espaçamento interno nas laterais do contêiner */
-  overflow-x: auto; /* Permite rolagem horizontal */
-  scroll-behavior: smooth; /* Rolagem suave */
-}
-
 .movie-container::-webkit-scrollbar {
   height: 8px; /* Altura do scrollbar horizontal */
 }
@@ -525,7 +463,8 @@ body {
   border: 2px solid transparent; /* Borda transparente */
   box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.4); /* Sombra */
   border-radius: 10px; /* Bordas arredondadas */
-  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, filter 0.3s ease-in-out; /* Transições suaves */
+  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out,
+    filter 0.3s ease-in-out; /* Transições suaves */
   box-sizing: border-box;
   cursor: pointer;
 }
@@ -554,18 +493,3 @@ body {
   left: 50%; /* Centraliza o botão horizontalmente */
   transform: translateX(-50%); /* Ajuste para centralizar o botão */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
